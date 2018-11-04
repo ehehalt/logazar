@@ -1,2 +1,2 @@
 # logazar
-Analyze logfiles in special format
+Analyze special logfiles
