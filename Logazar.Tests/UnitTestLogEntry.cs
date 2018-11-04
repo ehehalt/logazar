@@ -53,5 +53,22 @@ namespace Logazar.Tests
             Assert.Equal("connect", entry1.Type);
             Assert.Equal("dbname = XE username = SCOTT", entry2.Data);
         }
+
+        [Fact]
+        public void TestCompileLines()
+        {
+          const String line1 = "10/26/18 15:09:26 1> [compile] SELECT SYSDATE F";
+          const String line2 = "10/26/18 15:09:26 1> ROM DUAL";
+
+          var entry = new LogEntry();
+          entry.AddLine(line1);
+          entry.AddLine(line2);
+          entry.Parse();
+
+          Assert.True(entry.Parsed);
+          Assert.Equal(2, entry.Lines.Count);
+          Assert.Equal("compile", entry.Type);
+          Assert.Equal("SELECT SYSDATE FROM DUAL", entry.Data);
+        }
     }
 }

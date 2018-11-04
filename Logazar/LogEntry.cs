@@ -91,6 +91,16 @@ namespace Logazar
                     Data = data;
                   }
                 }
+
+                foreach(var line in Lines.Skip(1))
+                {
+                  var matchLine = LineRegex.Match(line);
+                  if (matchLine.Success)
+                  {
+                    var data = matchLine.Groups["data"].ToString();
+                    Data += data;
+                  }
+                }
             }
 
             Parsed = true;
