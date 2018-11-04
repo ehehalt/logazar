@@ -17,6 +17,28 @@ namespace Logazar
 				public String Level { get; protected set; }
 				public DateTime TimeStamp { get; protected set; }
 
+        private static Regex lineRegex = null;
+        private static Regex LineRegex 
+        { 
+          get
+          {
+            if (lineRegex == null)
+              lineRegex = new Regex(@"(?<date>\d+/\d+/\d+) (?<time>\d+:\d+:\d+) (?<level>\d+)> (?<data>.*)$", RegexOptions.Compiled);
+            return lineRegex;
+          } 
+        }
+
+        private static Regex typeRegex = null;
+        private static Regex TypeRegex 
+        { 
+          get
+          {
+            if (typeRegex == null)
+              typeRegex = new Regex(@"\[(?<type>.*?)\] (?<data>.*)$", RegexOptions.Compiled);
+            return typeRegex;
+          }
+        }
+
 				public String TimeStampString
 				{
 						get
@@ -47,14 +69,27 @@ namespace Logazar
 						if(Lines.Count > 0)
 						{
 								// First line
-								var rxFirstLine = new Regex(@"(?<date>\d+/\d+/\d+.) (?<time>\d+:\d+:\d+)");
-								var matchFirstLine = rxFirstLine.Match(Lines.First());
+								var matchFirstLine = LineRegex.Match(Lines.First());
                 if (matchFirstLine.Success)
                 {
                   var date = matchFirstLine.Groups["date"].ToString();
                   var time = matchFirstLine.Groups["time"].ToString();
-
+                  
                   TimeStamp = CreateTimeStamp(date: date, time: time);
+                  Level = matchFirstLine.Groups["level"].ToString();
+                  var data = matchFirstLine.Groups["data"].ToString();
+                  
+                  var matchTypeAndData = TypeRegex.Match(data);
+                  if (matchTypeAndData.Success)
+                  {
+                    Type = matchTypeAndData.Groups["type"].ToString();
+                    Data = matchTypeAndData.Groups["data"].ToString();
+                  }
+                  else
+                  {
+                    Type = "undefined";
+                    Data = data;
+                  }
                 }
 						}
 

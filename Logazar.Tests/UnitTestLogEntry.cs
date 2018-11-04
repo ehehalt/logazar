@@ -36,6 +36,9 @@ namespace Logazar.Tests
             Assert.True(entry1.Parsed);
             Assert.Equal(1, entry1.Lines.Count);
             Assert.True(timeStamp1.Equals(entry1.TimeStamp));
+            Assert.Equal("1", entry1.Level);
+            Assert.Equal("connect", entry1.Type);
+            Assert.Equal("dbname = XE username = SCOTT", entry1.Data);
 
 						const string line2 = "11/2/18 15:09:26 1> [connect] dbname = XE username = SCOTT";
             DateTime timeStamp2 = new DateTime(2018, 11, 2, 15, 9, 26);
@@ -46,6 +49,9 @@ namespace Logazar.Tests
             Assert.True(entry2.Parsed);
             Assert.Equal(1, entry2.Lines.Count);
             Assert.True(timeStamp2.Equals(entry2.TimeStamp));
+            Assert.Equal("1", entry2.Level);
+            Assert.Equal("connect", entry1.Type);
+            Assert.Equal("dbname = XE username = SCOTT", entry2.Data);
 				}
     }
 }
