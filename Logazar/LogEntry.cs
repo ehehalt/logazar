@@ -13,9 +13,9 @@ namespace Logazar
 
         // Parsed data
         public String Data { get; protected set; }
-				public String Type { get; protected set; }
-				public String Level { get; protected set; }
-				public DateTime TimeStamp { get; protected set; }
+        public String Type { get; protected set; }
+        public String Level { get; protected set; }
+        public DateTime TimeStamp { get; protected set; }
 
         private static Regex lineRegex = null;
         private static Regex LineRegex 
@@ -39,23 +39,23 @@ namespace Logazar
           }
         }
 
-				public String TimeStampString
-				{
-						get
-						{
-								return TimeStamp.ToShortDateString() + " " + TimeStamp.ToLongTimeString();
-						}
-				}
+        public String TimeStampString
+        {
+            get
+            {
+                return TimeStamp.ToShortDateString() + " " + TimeStamp.ToLongTimeString();
+            }
+        }
 
         public LogEntry()
         {
             Lines = new List<String>();
             Parsed = false;
 
-						Data = String.Empty;
-						Type = String.Empty;
-						Level = String.Empty;
-						TimeStamp = new DateTime();
+            Data = String.Empty;
+            Type = String.Empty;
+            Level = String.Empty;
+            TimeStamp = new DateTime();
         }
 
         public void AddLine(String newLine)
@@ -64,12 +64,12 @@ namespace Logazar
             Parsed = false;
         }
 
-				public void Parse()
-				{
-						if(Lines.Count > 0)
-						{
-								// First line
-								var matchFirstLine = LineRegex.Match(Lines.First());
+        public void Parse()
+        {
+            if(Lines.Count > 0)
+            {
+                // First line
+                var matchFirstLine = LineRegex.Match(Lines.First());
                 if (matchFirstLine.Success)
                 {
                   var date = matchFirstLine.Groups["date"].ToString();
@@ -91,10 +91,10 @@ namespace Logazar
                     Data = data;
                   }
                 }
-						}
+            }
 
             Parsed = true;
-				}
+        }
 
         private DateTime CreateTimeStamp(string date, string time)
         {
