@@ -7,6 +7,8 @@ namespace Logazar
 {
     public class LogEntry
     {
+        #region Properties
+
         // Original lines
         public IList<String> Lines { get; protected set; } 
         public Boolean Parsed { get; protected set; }
@@ -46,6 +48,9 @@ namespace Logazar
                 return TimeStamp.ToShortDateString() + " " + TimeStamp.ToLongTimeString();
             }
         }
+        
+        #endregion Properties
+        #region Constructor(s)
 
         public LogEntry()
         {
@@ -57,6 +62,9 @@ namespace Logazar
             Level = String.Empty;
             TimeStamp = new DateTime();
         }
+
+        #endregion Constructor(s)
+        #region Public Interface
 
         public void AddLine(String newLine)
         {
@@ -106,6 +114,9 @@ namespace Logazar
             Parsed = true;
         }
 
+        #endregion Public Interface
+        #region Private Functionality
+
         private DateTime CreateTimeStamp(string date, string time)
         {
           var dateParts = date.Split('/');
@@ -119,5 +130,7 @@ namespace Logazar
           var timeStamp = new DateTime(year, month, day, hour, minute, second);
           return timeStamp;
         }
+
+        #endregion Private Functionality
     }
 }
