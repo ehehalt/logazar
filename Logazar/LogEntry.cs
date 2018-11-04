@@ -34,7 +34,7 @@ namespace Logazar
           get
           {
             if (typeRegex == null)
-              typeRegex = new Regex(@"\[(?<type>.*?)\] (?<data>.*)$", RegexOptions.Compiled);
+              typeRegex = new Regex(@"\[(?<type>.*?)\]\s?(?<data>.*)$", RegexOptions.Compiled);
             return typeRegex;
           }
         }

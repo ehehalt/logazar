@@ -70,5 +70,31 @@ namespace Logazar.Tests
           Assert.Equal("compile", entry.Type);
           Assert.Equal("SELECT SYSDATE FROM DUAL", entry.Data);
         }
+
+        [Fact]
+        public void TestGetDatabaseParameter()
+        {
+          const String line = "10/26/18 15:09:26 2> [get database parameter] param = 1004";
+          var entry = new LogEntry();
+          entry.AddLine(line);
+          entry.Parse();
+
+          Assert.True(entry.Parsed);
+          Assert.Equal("get database parameter", entry.Type);
+          Assert.Equal("param = 1004", entry.Data);
+        } 
+
+        [Fact]
+        public void TestFetch()
+        {
+          const String line = "10/26/18 15:09:26 2> [fetch]";
+          var entry = new LogEntry();
+          entry.AddLine(line);
+          entry.Parse();
+
+          Assert.True(entry.Parsed);
+          Assert.Equal("fetch", entry.Type);
+          Assert.Equal("", entry.Data);
+        } 
     }
 }
