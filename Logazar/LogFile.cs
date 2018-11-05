@@ -27,7 +27,7 @@ namespace Logazar
       }
 
       #endregion Properties
-      #region Contructor(s)
+      #region Contructors
         
       public LogFile()
       {
@@ -41,16 +41,28 @@ namespace Logazar
         FilePath = filePath;
       }
 
-      #endregion Constructor(s)
+      #endregion Constructors
       #region Public Interface
 
       public void Load()
       {
         try
         {
-          // var fileSize = new FileInfo(FilePath).Length;
+          var lines = File.ReadLines(FilePath, Encoding.UTF8);
+          Load(lines);
+        }
+        catch(Exception ex)
+        {
+          Console.Error.WriteLine(ex.Message);
+        }
+      }
+
+      public void Load(IEnumerable<string> lines)
+      {
+        try
+        {
           var entry = new LogEntry();
-          foreach(String line in File.ReadLines(FilePath, Encoding.UTF8))
+          foreach(String line in lines)
           {
             if(LineRegex.IsMatch(line))
             {
