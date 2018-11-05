@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Xunit;
 using Logazar;
 
@@ -18,5 +20,23 @@ namespace Logazar.Tests
       Assert.Equal(filename, logfile2.FilePath);
       Assert.Equal(0, logfile2.Entries.Count);
     }
+
+    [Fact]
+    public void TestTwoEntries()
+    {
+      var logfile = new LogFile();
+
+      var lines = new List<String>();
+      lines.Add("10/26/18 15:09:26 1> [connect] dbname = XE username = SCOTT");
+      lines.Add("10/26/18 15:09:26 1> [connect] dbname = XE username = SCOTT");
+      
+      logfile.Load(lines);
+
+      Assert.Equal(2, logfile.Entries.Count);
+      foreach(var entry in logfile.Entries)
+      {
+        Assert.Equal(LogFile.CONNECT, entry.Type);
+      }
+    } 
   }
 }
