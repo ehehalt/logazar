@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -62,20 +63,31 @@ namespace Logazar
     {
       try
       {
-        var entry = new LogEntry();
-        foreach (String line in lines)
+        // code part not eloquent
+        // dont repeat yourself ... etc
+        if (lines.Count() > 0)
         {
-          if (LineRegex.IsMatch(line))
+          var entry = new LogEntry();
+          entry.Lines.Add(lines.First());
+
+          foreach (String line in lines.Skip(1))
           {
-            if (entry.Lines.Count == 0)
+            if (LineRegex.IsMatch(line))
             {
-              entry.AddLine(line);
+              if (entry.Lines.Count > 0)
+              {
+                entry.Parse();
+                Entries.Add(entry);
+              }
+              entry = new LogEntry();
             }
+            entry.AddLine(line);
+          }
+          if(entry.Lines.Count > 0)
+          {
             entry.Parse();
             Entries.Add(entry);
-            entry = new LogEntry();
           }
-          entry.AddLine(line);
         }
       }
       catch (System.Exception ex)

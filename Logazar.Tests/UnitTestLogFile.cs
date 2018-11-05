@@ -22,7 +22,7 @@ namespace Logazar.Tests
     }
 
     [Fact]
-    public void TestTwoEntries()
+    public void TestTwoSeperatedEntries()
     {
       var logfile = new LogFile();
 
@@ -38,5 +38,25 @@ namespace Logazar.Tests
         Assert.Equal(LogFile.CONNECT, entry.Type);
       }
     } 
+
+    [Fact]
+    public void TestOneEntryWithTwoLines()
+    {
+      var logfile = new LogFile();
+
+      var lines = new List<String>();
+      lines.Add("10/26/18 15:09:26 1> [compile] ALTER SESSION SET nls_numeric_characters = '");
+      lines.Add("10/26/18 15:09:26 1> .,' ");
+      
+      logfile.Load(lines);
+
+      Assert.Equal(1, logfile.Entries.Count);
+
+      var entry = logfile.Entries.First();
+
+      Assert.Equal(LogFile.COMPILE, entry.Type);
+      Assert.Equal("ALTER SESSION SET nls_numeric_characters = '.,' ", entry.Data);
+
+    }
   }
 }
