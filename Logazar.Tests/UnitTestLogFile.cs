@@ -56,7 +56,6 @@ namespace Logazar.Tests
 
       Assert.Equal(LogFile.COMPILE, entry.Type);
       Assert.Equal("ALTER SESSION SET nls_numeric_characters = '.,' ", entry.Data);
-
     }
   }
 }
