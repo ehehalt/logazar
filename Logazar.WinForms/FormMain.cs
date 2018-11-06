@@ -15,6 +15,16 @@ namespace Logazar.WinForms
 {
     public partial class FormMain : Form
     {
+        private enum ResultTypeEnum
+        {
+            Standard,
+            Pretty,
+            Original
+        }
+
+        private ResultTypeEnum ResultType { get; set; } = ResultTypeEnum.Standard;
+        private Boolean SearchRegex { get; set; } = true;
+        private Boolean SearchCaseSensitive { get; set; } = false;
         private LogFile logFile { get; set; }
 
         public FormMain()
@@ -27,18 +37,22 @@ namespace Logazar.WinForms
         private void FormMain_Load(object sender, EventArgs e)
         {
             ListViewResultConfig();
-
+            Buttons_Load();
             LogData_Load();
         }
 
         private void btnRegex_Click(object sender, EventArgs e)
         {
-
+            SearchRegex = !SearchRegex;
+            SearchButtons_Load();
+            LvResult_ShowData();
         }
 
         private void btnIgnoreCase_Click(object sender, EventArgs e)
         {
-
+            SearchCaseSensitive = !SearchCaseSensitive;
+            SearchButtons_Load();
+            LvResult_ShowData();
         }
 
         private void btnRefresh_Click(object sender, EventArgs e)
@@ -68,17 +82,20 @@ namespace Logazar.WinForms
 
         private void btnStandard_Click(object sender, EventArgs e)
         {
-
+            ResultType = ResultTypeEnum.Standard;
+            CurrentEntryButtons_Load();
         }
 
         private void btnPretty_Click(object sender, EventArgs e)
         {
-
+            ResultType = ResultTypeEnum.Pretty;
+            CurrentEntryButtons_Load();
         }
 
         private void btnOriginal_Click(object sender, EventArgs e)
         {
-
+            ResultType = ResultTypeEnum.Original;
+            CurrentEntryButtons_Load();
         }
 
         private void tbSearchField_TextChanged(object sender, EventArgs e)
@@ -152,6 +169,13 @@ namespace Logazar.WinForms
             }
         }
 
+        private void Buttons_Load()
+        {
+            SearchButtons_Load();
+            CurrentEntryButtons_Load();
+            TbCurrentEntry_ShowData();
+        }
+
         private void LvResult_ShowData()
         {
             lvResult.BeginUpdate();
@@ -160,8 +184,24 @@ namespace Logazar.WinForms
             {
                 var entries = logFile.Entries
                     .Reverse()
-                    .Where(entry => Regex.IsMatch(entry.Data, tbSearchField.Text, RegexOptions.IgnoreCase))
                     .Where(entry => entry.Type == LogFile.COMPILE);
+
+                if(SearchRegex)
+                {
+                    Regex rx = new Regex(tbSearchField.Text, SearchCaseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase);
+                    entries = entries.Where(entry => rx.IsMatch(entry.Data));
+                }
+                else
+                {
+                    if(SearchCaseSensitive)
+                    {
+                        entries = entries.Where(entry => entry.Data.ToString().Contains(tbSearchField.Text));
+                    }
+                    else
+                    {
+                        entries = entries.Where(entry => entry.Data.ToString().ToUpper().Contains(tbSearchField.Text.ToUpper()));
+                    }
+                }
 
                 foreach (LogEntry entry in entries)
                 {
@@ -179,6 +219,36 @@ namespace Logazar.WinForms
             tbCurrentEntry.Text = "";
         }
 
+        private void SearchButtons_Load()
+        {
+            HighlightButton(new Button[] { btnConfigure, btnInfo, btnPin }, false);
+
+            HighlightButton(btnIgnoreCase, SearchCaseSensitive);
+            HighlightButton(btnRegex, SearchRegex);                
+        }
+
+        private void CurrentEntryButtons_Load()
+        {
+            HighlightButton(new Button[] { btnStandard, btnPretty, btnOriginal }, false);
+            switch (ResultType)
+            {
+                case ResultTypeEnum.Standard:
+                    HighlightButton(btnStandard, true);
+                    break;
+                case ResultTypeEnum.Pretty:
+                    HighlightButton(btnPretty, true);
+                    break;
+                case ResultTypeEnum.Original:
+                    HighlightButton(btnOriginal, true);
+                    break;
+                default:
+                    HighlightButton(btnStandard, true);
+                    break;
+            }
+
+            TbCurrentEntry_ShowData();
+        }
+
         private void TbCurrentEntry_ShowData()
         {
             if(lvResult.SelectedItems.Count > 0)
@@ -187,12 +257,41 @@ namespace Logazar.WinForms
                 if (item != null && item.Tag != null && item.Tag is LogEntry)
                 {
                     var entry = item.Tag as LogEntry;
-                    tbCurrentEntry.Text = entry.Data;
+                    switch (ResultType)
+                    {
+                        case ResultTypeEnum.Standard:
+                            tbCurrentEntry.Text = entry.Data;
+                            break;
+                        case ResultTypeEnum.Pretty:
+                            break;
+                        case ResultTypeEnum.Original:
+                            tbCurrentEntry.Text = entry.DataOriginal;
+                            break;
+                        default:
+                            tbCurrentEntry.Text = entry.Data;
+                            break;
+                    }   
                 }
                 else
                 {
                     tbCurrentEntry.Text = "";
                 }
+            }
+        }
+
+        private void HighlightButton(IList<Button> buttons, Boolean highlight)
+        {
+            buttons.ToList().ForEach(button => HighlightButton(button, highlight));
+        }
+        private void HighlightButton(Button button, Boolean highlight)
+        {
+            if (highlight)
+            {
+                button.BackColor = Color.White;
+            }
+            else
+            {
+                button.BackColor = Color.LightGray;
             }
         }
 

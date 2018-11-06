@@ -102,7 +102,7 @@
             // btnRegex
             // 
             this.btnRegex.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRegex.Enabled = false;
+            this.btnRegex.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRegex.Location = new System.Drawing.Point(3, 3);
             this.btnRegex.Name = "btnRegex";
             this.btnRegex.Size = new System.Drawing.Size(24, 23);
@@ -114,7 +114,6 @@
             // btnIgnoreCase
             // 
             this.btnIgnoreCase.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnIgnoreCase.Enabled = false;
             this.btnIgnoreCase.Location = new System.Drawing.Point(33, 3);
             this.btnIgnoreCase.Name = "btnIgnoreCase";
             this.btnIgnoreCase.Size = new System.Drawing.Size(29, 23);
@@ -197,7 +196,6 @@
             // btnStandard
             // 
             this.btnStandard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStandard.Enabled = false;
             this.btnStandard.Location = new System.Drawing.Point(632, 3);
             this.btnStandard.Name = "btnStandard";
             this.btnStandard.Size = new System.Drawing.Size(57, 23);
@@ -221,7 +219,6 @@
             // btnOriginal
             // 
             this.btnOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOriginal.Enabled = false;
             this.btnOriginal.Location = new System.Drawing.Point(749, 3);
             this.btnOriginal.Name = "btnOriginal";
             this.btnOriginal.Size = new System.Drawing.Size(48, 23);
