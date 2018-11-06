@@ -56,6 +56,7 @@ namespace Logazar
       catch (Exception ex)
       {
         Console.Error.WriteLine(ex.Message);
+        throw (ex);
       }
     }
 
