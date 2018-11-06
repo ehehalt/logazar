@@ -11,6 +11,7 @@ namespace Logazar
 
         // Original lines
         public IList<String> Lines { get; protected set; } 
+        public String DataOriginal => String.Join(System.Environment.NewLine, Lines);
         public Boolean Parsed { get; protected set; }
 
         // Parsed data

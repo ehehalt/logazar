@@ -96,5 +96,30 @@ namespace Logazar.Tests
       Assert.Equal("fetch", entry.Type);
       Assert.Equal("", entry.Data);
     }
+
+    [Fact]
+    public void TestDataOriginal()
+    {
+      const String line1 = "10/26/18 15:09:26 2> [fetch] hell";
+      const String line2 = "10/26/18 15:09:26 2> o";
+      
+      // test with one line of data
+      var entry1 = new LogEntry();
+      entry1.AddLine(line1);
+      entry1.Parse();
+
+      Assert.Equal("hell", entry1.Data);
+      Assert.Equal(line1, entry1.DataOriginal);
+
+      // test with two lines of data
+      var entry2 = new LogEntry();
+      entry2.AddLine(line1);
+      entry2.AddLine(line2);
+      entry2.Parse();
+
+      Assert.Equal("hello", entry2.Data);
+      var dataOriginal = line1 + System.Environment.NewLine + line2;
+      Assert.Equal(entry2.DataOriginal, dataOriginal);
+    }
   }
 }
