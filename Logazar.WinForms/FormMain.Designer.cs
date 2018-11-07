@@ -46,6 +46,7 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.lvResult = new System.Windows.Forms.ListView();
             this.tbCurrentEntry = new System.Windows.Forms.TextBox();
+            this.btnRotateLayout = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -173,6 +174,7 @@
             // 
             // panelBottom
             // 
+            this.panelBottom.Controls.Add(this.btnRotateLayout);
             this.panelBottom.Controls.Add(this.btnCopy);
             this.panelBottom.Controls.Add(this.btnStandard);
             this.panelBottom.Controls.Add(this.btnPretty);
@@ -207,7 +209,6 @@
             // btnPretty
             // 
             this.btnPretty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPretty.Enabled = false;
             this.btnPretty.Location = new System.Drawing.Point(695, 3);
             this.btnPretty.Name = "btnPretty";
             this.btnPretty.Size = new System.Drawing.Size(48, 23);
@@ -232,7 +233,6 @@
             this.splitContainer.Dock = System.Windows.Forms.DockStyle.Fill;
             this.splitContainer.Location = new System.Drawing.Point(0, 30);
             this.splitContainer.Name = "splitContainer";
-            this.splitContainer.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer.Panel1
             // 
@@ -242,7 +242,7 @@
             // 
             this.splitContainer.Panel2.Controls.Add(this.tbCurrentEntry);
             this.splitContainer.Size = new System.Drawing.Size(800, 368);
-            this.splitContainer.SplitterDistance = 173;
+            this.splitContainer.SplitterDistance = 399;
             this.splitContainer.TabIndex = 1;
             // 
             // lvResult
@@ -253,7 +253,7 @@
             this.lvResult.Location = new System.Drawing.Point(0, 0);
             this.lvResult.MultiSelect = false;
             this.lvResult.Name = "lvResult";
-            this.lvResult.Size = new System.Drawing.Size(800, 173);
+            this.lvResult.Size = new System.Drawing.Size(399, 368);
             this.lvResult.TabIndex = 0;
             this.lvResult.UseCompatibleStateImageBehavior = false;
             this.lvResult.SelectedIndexChanged += new System.EventHandler(this.lvResult_SelectedIndexChanged);
@@ -267,8 +267,18 @@
             this.tbCurrentEntry.Name = "tbCurrentEntry";
             this.tbCurrentEntry.ReadOnly = true;
             this.tbCurrentEntry.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbCurrentEntry.Size = new System.Drawing.Size(800, 191);
+            this.tbCurrentEntry.Size = new System.Drawing.Size(397, 368);
             this.tbCurrentEntry.TabIndex = 0;
+            // 
+            // btnRotateLayout
+            // 
+            this.btnRotateLayout.Location = new System.Drawing.Point(92, 3);
+            this.btnRotateLayout.Name = "btnRotateLayout";
+            this.btnRotateLayout.Size = new System.Drawing.Size(76, 23);
+            this.btnRotateLayout.TabIndex = 4;
+            this.btnRotateLayout.Text = "rotate layout";
+            this.btnRotateLayout.UseVisualStyleBackColor = true;
+            this.btnRotateLayout.Click += new System.EventHandler(this.btnRotateLayout_Click);
             // 
             // FormMain
             // 
@@ -318,6 +328,7 @@
         private System.Windows.Forms.Button btnOriginal;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnCopy;
+        private System.Windows.Forms.Button btnRotateLayout;
     }
 }
 

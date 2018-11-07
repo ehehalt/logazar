@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -22,6 +24,7 @@ namespace Logazar.WinForms
             Original
         }
 
+        // Todo: save properties in config file
         private ResultTypeEnum ResultType { get; set; } = ResultTypeEnum.Standard;
         private Boolean SearchRegex { get; set; } = true;
         private Boolean SearchCaseSensitive { get; set; } = false;
@@ -80,6 +83,18 @@ namespace Logazar.WinForms
             Clipboard.SetText(tbCurrentEntry.Text);
         }
 
+        private void btnRotateLayout_Click(object sender, EventArgs e)
+        {
+            if(splitContainer.Orientation == Orientation.Horizontal)
+            {
+                splitContainer.Orientation = Orientation.Vertical;
+            }
+            else
+            {
+                splitContainer.Orientation = Orientation.Horizontal;
+            }
+        }
+
         private void btnStandard_Click(object sender, EventArgs e)
         {
             ResultType = ResultTypeEnum.Standard;
@@ -130,7 +145,7 @@ namespace Logazar.WinForms
         {
             // calculate the data column size to fit in the listview without needing a horizontal scrollbar
             int width = 25;
-            foreach(ColumnHeader col in lvResult.Columns)
+            foreach (ColumnHeader col in lvResult.Columns)
             {
                 if (col.Name != "data")
                     width += col.Width;
@@ -158,6 +173,7 @@ namespace Logazar.WinForms
             // prototyped
             try
             {
+                // Todo: make logfile configurable
                 logFile = new LogFile(@"C:\Temp\guptaora.log");
                 logFile.Load();
                 toolStripStatusLabel.Text = $"guptaora.log loaded: {logFile.Entries.Count} entries found ...";
@@ -186,14 +202,14 @@ namespace Logazar.WinForms
                     .Reverse()
                     .Where(entry => entry.Type == LogFile.COMPILE);
 
-                if(SearchRegex)
+                if (SearchRegex)
                 {
                     Regex rx = new Regex(tbSearchField.Text, SearchCaseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase);
                     entries = entries.Where(entry => rx.IsMatch(entry.Data));
                 }
                 else
                 {
-                    if(SearchCaseSensitive)
+                    if (SearchCaseSensitive)
                     {
                         entries = entries.Where(entry => entry.Data.ToString().Contains(tbSearchField.Text));
                     }
@@ -211,7 +227,7 @@ namespace Logazar.WinForms
                 }
                 toolStripStatusLabel.Text = $"Filtered: {entries.Count()}/{logFile.Entries.Count()} ...";
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 toolStripStatusLabel.Text = $"Regular Expression Error: {ex.Message}";
             }
@@ -224,7 +240,7 @@ namespace Logazar.WinForms
             HighlightButton(new Button[] { btnConfigure, btnInfo, btnPin }, false);
 
             HighlightButton(btnIgnoreCase, SearchCaseSensitive);
-            HighlightButton(btnRegex, SearchRegex);                
+            HighlightButton(btnRegex, SearchRegex);
         }
 
         private void CurrentEntryButtons_Load()
@@ -251,7 +267,7 @@ namespace Logazar.WinForms
 
         private void TbCurrentEntry_ShowData()
         {
-            if(lvResult.SelectedItems.Count > 0)
+            if (lvResult.SelectedItems.Count > 0)
             {
                 var item = lvResult.SelectedItems[0];
                 if (item != null && item.Tag != null && item.Tag is LogEntry)
@@ -263,6 +279,7 @@ namespace Logazar.WinForms
                             tbCurrentEntry.Text = entry.Data;
                             break;
                         case ResultTypeEnum.Pretty:
+                            tbCurrentEntry.Text = PrettifySql(entry.Data);
                             break;
                         case ResultTypeEnum.Original:
                             tbCurrentEntry.Text = entry.DataOriginal;
@@ -270,7 +287,7 @@ namespace Logazar.WinForms
                         default:
                             tbCurrentEntry.Text = entry.Data;
                             break;
-                    }   
+                    }
                 }
                 else
                 {
@@ -294,6 +311,45 @@ namespace Logazar.WinForms
                 button.BackColor = Color.LightGray;
             }
         }
+
+        private String PrettifySql(String statement)
+        {
+            // Todo: make sql formatter configurable ...
+            // pip install --upgrade sqlparse
+
+            var output = statement;
+
+            var tempFileName = Path.GetTempFileName();
+            File.WriteAllText(tempFileName, statement);
+
+            try
+            {
+                Process p = new Process();
+                // Redirect the output stream of the child process.
+                p.StartInfo.UseShellExecute = false;
+                p.StartInfo.RedirectStandardOutput = true;
+                p.StartInfo.FileName = $"sqlformat";
+                p.StartInfo.Arguments = $"-k upper -a {tempFileName}";
+                p.StartInfo.CreateNoWindow = true;
+                p.Start();
+
+                // Do not wait for the child process to exit before
+                // reading to the end of its redirected stream.
+                // p.WaitForExit();
+                // Read the output stream first and then wait.
+                output = p.StandardOutput.ReadToEnd();
+                p.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                toolStripStatusLabel.Text = $"Error: {ex.Message}";
+            }
+
+            File.Delete(tempFileName);
+
+            return output;
+        }
+
 
     }
 }
