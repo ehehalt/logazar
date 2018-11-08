@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Logazar.WinForms
@@ -66,6 +61,11 @@ namespace Logazar.WinForms
         private void btnPin_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPurge_Click(object sender, EventArgs e)
+        {
+            PurgeLogfile();
         }
 
         private void btnConfigure_Click(object sender, EventArgs e)
@@ -350,6 +350,18 @@ namespace Logazar.WinForms
             return output;
         }
 
+        private void PurgeLogfile()
+        {
+            var filePart = Path.Combine(Path.GetDirectoryName(logFile.FilePath), Path.GetFileNameWithoutExtension(logFile.FilePath));
+            var date = DateTime.Now;
+            var datePart = $"{date.Year:d4}.{date.Month:d2}.{date.Day:d2}-{date.Hour:d2}.{date.Minute:d2}.{date.Second:d2}.{date.Millisecond:d3}";
+            var extension = Path.GetExtension(logFile.FilePath);
+            var newFilePath = $"{filePart}-{datePart}{extension}";
+
+            File.Copy(logFile.FilePath, newFilePath);
+            File.WriteAllText(logFile.FilePath, string.Empty);
+            LogData_Load();
+        }
 
     }
 }
