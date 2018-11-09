@@ -32,6 +32,7 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
+            this.btnPurge = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnRegex = new System.Windows.Forms.Button();
             this.btnIgnoreCase = new System.Windows.Forms.Button();
@@ -48,7 +49,6 @@
             this.splitContainer = new System.Windows.Forms.SplitContainer();
             this.lvResult = new System.Windows.Forms.ListView();
             this.tbCurrentEntry = new System.Windows.Forms.TextBox();
-            this.btnPurge = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
@@ -91,6 +91,19 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(899, 30);
             this.panelTop.TabIndex = 0;
+            // 
+            // btnPurge
+            // 
+            this.btnPurge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPurge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnPurge.Location = new System.Drawing.Point(778, 3);
+            this.btnPurge.Name = "btnPurge";
+            this.btnPurge.Size = new System.Drawing.Size(45, 23);
+            this.btnPurge.TabIndex = 7;
+            this.btnPurge.Text = "purge";
+            this.toolTip.SetToolTip(this.btnPurge, "Remove the log entries from the file ...");
+            this.btnPurge.UseVisualStyleBackColor = true;
+            this.btnPurge.Click += new System.EventHandler(this.btnPurge_Click);
             // 
             // btnRefresh
             // 
@@ -286,6 +299,7 @@
             // tbCurrentEntry
             // 
             this.tbCurrentEntry.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbCurrentEntry.Font = new System.Drawing.Font("Lucida Console", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbCurrentEntry.Location = new System.Drawing.Point(0, 0);
             this.tbCurrentEntry.Multiline = true;
             this.tbCurrentEntry.Name = "tbCurrentEntry";
@@ -293,19 +307,6 @@
             this.tbCurrentEntry.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbCurrentEntry.Size = new System.Drawing.Size(447, 368);
             this.tbCurrentEntry.TabIndex = 0;
-            // 
-            // btnPurge
-            // 
-            this.btnPurge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPurge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPurge.Location = new System.Drawing.Point(778, 3);
-            this.btnPurge.Name = "btnPurge";
-            this.btnPurge.Size = new System.Drawing.Size(45, 23);
-            this.btnPurge.TabIndex = 7;
-            this.btnPurge.Text = "purge";
-            this.toolTip.SetToolTip(this.btnPurge, "Remove the log entries from the file ...");
-            this.btnPurge.UseVisualStyleBackColor = true;
-            this.btnPurge.Click += new System.EventHandler(this.btnPurge_Click);
             // 
             // FormMain
             // 
