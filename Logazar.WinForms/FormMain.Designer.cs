@@ -50,6 +50,7 @@
             this.lvResult = new System.Windows.Forms.ListView();
             this.tbCurrentEntry = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnExport = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -78,6 +79,7 @@
             // panelTop
             // 
             this.panelTop.BackColor = System.Drawing.SystemColors.ButtonFace;
+            this.panelTop.Controls.Add(this.btnExport);
             this.panelTop.Controls.Add(this.btnPurge);
             this.panelTop.Controls.Add(this.btnRefresh);
             this.panelTop.Controls.Add(this.btnRegex);
@@ -109,7 +111,7 @@
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRefresh.Location = new System.Drawing.Point(680, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(622, 3);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(57, 23);
             this.btnRefresh.TabIndex = 1;
@@ -148,7 +150,7 @@
             this.btnPin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnPin.Enabled = false;
-            this.btnPin.Location = new System.Drawing.Point(743, 3);
+            this.btnPin.Location = new System.Drawing.Point(685, 3);
             this.btnPin.Name = "btnPin";
             this.btnPin.Size = new System.Drawing.Size(29, 23);
             this.btnPin.TabIndex = 2;
@@ -190,7 +192,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSearchField.Location = new System.Drawing.Point(68, 5);
             this.tbSearchField.Name = "tbSearchField";
-            this.tbSearchField.Size = new System.Drawing.Size(606, 20);
+            this.tbSearchField.Size = new System.Drawing.Size(548, 20);
             this.tbSearchField.TabIndex = 0;
             this.tbSearchField.TextChanged += new System.EventHandler(this.tbSearchField_TextChanged);
             // 
@@ -308,6 +310,18 @@
             this.tbCurrentEntry.Size = new System.Drawing.Size(447, 368);
             this.tbCurrentEntry.TabIndex = 0;
             // 
+            // btnExport
+            // 
+            this.btnExport.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExport.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnExport.Location = new System.Drawing.Point(720, 3);
+            this.btnExport.Name = "btnExport";
+            this.btnExport.Size = new System.Drawing.Size(52, 23);
+            this.btnExport.TabIndex = 8;
+            this.btnExport.Text = "export";
+            this.btnExport.UseVisualStyleBackColor = true;
+            this.btnExport.Click += new System.EventHandler(this.btnExport_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,6 +373,7 @@
         private System.Windows.Forms.Button btnRotateLayout;
         private System.Windows.Forms.Button btnPurge;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Button btnExport;
     }
 }
 

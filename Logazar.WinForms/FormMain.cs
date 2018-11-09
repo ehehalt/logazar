@@ -12,6 +12,8 @@ namespace Logazar.WinForms
 {
     public partial class FormMain : Form
     {
+        #region Enumerations
+
         private enum ResultTypeEnum
         {
             Standard,
@@ -19,17 +21,24 @@ namespace Logazar.WinForms
             Original
         }
 
+        #endregion Enumerations
+        #region Properties
+
         // Todo: save properties in config file
         private ResultTypeEnum ResultType { get; set; } = ResultTypeEnum.Standard;
         private Boolean SearchRegex { get; set; } = true;
         private Boolean SearchCaseSensitive { get; set; } = false;
         private LogFile logFile { get; set; }
 
+        #endregion Properties
+        #region Constructor(s)
+
         public FormMain()
         {
             InitializeComponent();
         }
 
+        #endregion Constructor(s)
         #region Events
 
         private void FormMain_Load(object sender, EventArgs e)
@@ -61,6 +70,11 @@ namespace Logazar.WinForms
         private void btnPin_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnExport_Click(object sender, EventArgs e)
+        {
+            ExportSqlFile();
         }
 
         private void btnPurge_Click(object sender, EventArgs e)
@@ -129,6 +143,7 @@ namespace Logazar.WinForms
         }
 
         #endregion Events
+        #region Methods
 
         private void ListViewResultConfig()
         {
@@ -363,5 +378,43 @@ namespace Logazar.WinForms
             LogData_Load();
         }
 
+        private void ExportSqlFile()
+        {
+            try
+            {
+                String sql = "";
+                String extension = ResultType == ResultTypeEnum.Original ? ".txt" : ".sql";
+                int idx = 1;
+                foreach (LogEntry logEntry in logFile.Entries.Where(entry => entry.Type == LogFile.COMPILE))
+                {
+                    sql += $"-- {idx} - ";
+                    sql += System.Environment.NewLine;
+                    sql += System.Environment.NewLine;
+                    if (ResultType == ResultTypeEnum.Pretty)
+                    {
+                        sql += PrettifySql(logEntry.Data);
+                    }
+                    else if (ResultType == ResultTypeEnum.Standard)
+                    {
+                        sql += logEntry.Data.Trim();
+                    }
+                    else
+                    {
+                        sql += logEntry.DataOriginal;
+                    }
+                    sql += System.Environment.NewLine;
+                    sql += System.Environment.NewLine;
+
+                    idx++;
+                }
+
+                File.WriteAllText(logFile.FilePath + extension, sql);
+            }
+            catch(Exception ex)
+            {
+                toolStripStatusLabel.Text = $"Error: {ex.Message}";
+            }
+        }
+        #endregion Methods
     }
 }
