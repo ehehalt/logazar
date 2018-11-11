@@ -21,6 +21,13 @@ namespace Logazar.WinForms
             Original
         }
 
+        private enum ExportTypeEnum
+        {
+            SQL,
+            Markdown,
+            OrgMode
+        }
+
         #endregion Enumerations
         #region Properties
 
@@ -72,9 +79,20 @@ namespace Logazar.WinForms
 
         }
 
-        private void btnExport_Click(object sender, EventArgs e)
+
+        private void btnExportSQL_Click(object sender, EventArgs e)
         {
-            ExportSqlFile();
+            ExportFile(ExportTypeEnum.SQL);
+        }
+
+        private void btnExportMD_Click(object sender, EventArgs e)
+        {
+            ExportFile(ExportTypeEnum.Markdown);
+        }
+
+        private void btnExportORG_Click(object sender, EventArgs e)
+        {
+            ExportFile(ExportTypeEnum.OrgMode);
         }
 
         private void btnPurge_Click(object sender, EventArgs e)
@@ -99,7 +117,7 @@ namespace Logazar.WinForms
 
         private void btnRotateLayout_Click(object sender, EventArgs e)
         {
-            if(splitContainer.Orientation == Orientation.Horizontal)
+            if (splitContainer.Orientation == Orientation.Horizontal)
             {
                 splitContainer.Orientation = Orientation.Vertical;
             }
@@ -378,43 +396,117 @@ namespace Logazar.WinForms
             LogData_Load();
         }
 
-        private void ExportSqlFile()
+
+        private void ExportFile(ExportTypeEnum exportType)
         {
+            String extension;
+            switch (exportType)
+            {
+                case ExportTypeEnum.SQL:
+                    extension = ResultType == ResultTypeEnum.Original ? ".txt" : ".sql";
+                    break;
+                case ExportTypeEnum.Markdown:
+                    extension = ".md";
+                    break;
+                case ExportTypeEnum.OrgMode:
+                    extension = ".org";
+                    break;
+                default:
+                    toolStripStatusLabel.Text = $"Error: Unknown export type ...";
+                    return;
+            }
+            String filePath = logFile.FilePath + extension;
+
             try
             {
-                String sql = "";
-                String extension = ResultType == ResultTypeEnum.Original ? ".txt" : ".sql";
+                String text = "";
+                switch (exportType)
+                {
+                    case ExportTypeEnum.SQL:
+                        text = "-- Guptaora.log" + Environment.NewLine;
+                        break;
+                    case ExportTypeEnum.Markdown:
+                        text = "# Guptaora.log" + Environment.NewLine + Environment.NewLine;
+                        break;
+                    case ExportTypeEnum.OrgMode:
+                        text = " * Guptaora.log" + Environment.NewLine;
+                        break;
+                }
+
                 int idx = 1;
                 foreach (LogEntry logEntry in logFile.Entries.Where(entry => entry.Type == LogFile.COMPILE))
                 {
-                    sql += $"-- {idx} - ";
-                    sql += System.Environment.NewLine;
-                    sql += System.Environment.NewLine;
+                    switch (exportType)
+                    {
+                        case ExportTypeEnum.SQL:
+                            text += $"-- {idx} - ";
+                            text += System.Environment.NewLine;
+                            text += System.Environment.NewLine;
+                            break;
+                        case ExportTypeEnum.Markdown:
+                            text += $"## Statement {idx}";
+                            text += Environment.NewLine;
+                            text += Environment.NewLine;
+                            text += ResultType == ResultTypeEnum.Original ? "```text" : "```sql";
+                            text += Environment.NewLine;
+                            break;
+                        case ExportTypeEnum.OrgMode:
+                            text += $"** Statement {idx}";
+                            text += Environment.NewLine;
+                            text += Environment.NewLine;
+                            text += ResultType == ResultTypeEnum.Original ? "#+BEGIN_SRC text" : "#+BEGIN_SRC sql";
+                            text += Environment.NewLine;
+                            break;
+                    }
+
                     if (ResultType == ResultTypeEnum.Pretty)
                     {
-                        sql += PrettifySql(logEntry.Data);
+                        text += PrettifySql(logEntry.Data);
                     }
                     else if (ResultType == ResultTypeEnum.Standard)
                     {
-                        sql += logEntry.Data.Trim();
+                        text += logEntry.Data.Trim();
                     }
                     else
                     {
-                        sql += logEntry.DataOriginal;
+                        text += logEntry.DataOriginal;
                     }
-                    sql += System.Environment.NewLine;
-                    sql += System.Environment.NewLine;
+                    switch (exportType)
+                    {
+                        case ExportTypeEnum.SQL:
+                            text += System.Environment.NewLine;
+                            text += System.Environment.NewLine;
+                            break;
+                        case ExportTypeEnum.Markdown:
+                            text += System.Environment.NewLine;
+                            text += "```";
+                            text += System.Environment.NewLine;
+                            text += System.Environment.NewLine;
+                            break;
+                        case ExportTypeEnum.OrgMode:
+                            text += ";";
+                            text += System.Environment.NewLine;
+                            text += "#+END_SRC";
+                            text += System.Environment.NewLine;
+                            text += System.Environment.NewLine;
+                            break;
+                    }
+
 
                     idx++;
                 }
 
-                File.WriteAllText(logFile.FilePath + extension, sql);
+
+                File.WriteAllText(filePath, text);
+                MessageBox.Show($"File '{filePath}' created successfully.", "Logazar - Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             catch(Exception ex)
             {
                 toolStripStatusLabel.Text = $"Error: {ex.Message}";
+                MessageBox.Show($"Error while creating file '{filePath}':" + Environment.NewLine + ex.Message, "Logazar - Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
         #endregion Methods
     }
 }
