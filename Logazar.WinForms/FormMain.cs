@@ -496,7 +496,6 @@ namespace Logazar.WinForms
                     idx++;
                 }
 
-
                 File.WriteAllText(filePath, text);
                 MessageBox.Show($"File '{filePath}' created successfully.", "Logazar - Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
