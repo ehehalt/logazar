@@ -429,7 +429,7 @@ namespace Logazar.WinForms
                         text = "# Guptaora.log" + Environment.NewLine + Environment.NewLine;
                         break;
                     case ExportTypeEnum.OrgMode:
-                        text = " * Guptaora.log" + Environment.NewLine;
+                        text = "* Guptaora.log" + Environment.NewLine;
                         break;
                 }
 
