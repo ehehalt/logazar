@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -53,6 +54,7 @@ namespace Logazar.WinForms
             ListViewResultConfig();
             Buttons_Load();
             LogData_Load();
+            Title_Load();
         }
 
         private void btnRegex_Click(object sender, EventArgs e)
@@ -216,6 +218,13 @@ namespace Logazar.WinForms
             {
                 toolStripStatusLabel.Text = $"Error: {ex.Message} ...";
             }
+        }
+
+        private void Title_Load()
+        {
+            Version version = Assembly.GetEntryAssembly().GetName().Version;
+            String versionString = version.Major + "." + version.Minor + "." + version.Build;
+            this.Text = $"Logazar {versionString}";
         }
 
         private void Buttons_Load()
@@ -474,6 +483,7 @@ namespace Logazar.WinForms
                     switch (exportType)
                     {
                         case ExportTypeEnum.SQL:
+                            text += ";";
                             text += System.Environment.NewLine;
                             text += System.Environment.NewLine;
                             break;
