@@ -32,7 +32,6 @@
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
-            this.btnExportSQL = new System.Windows.Forms.Button();
             this.btnPurge = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnRegex = new System.Windows.Forms.Button();
@@ -41,7 +40,11 @@
             this.btnConfigure = new System.Windows.Forms.Button();
             this.btnInfo = new System.Windows.Forms.Button();
             this.tbSearchField = new System.Windows.Forms.TextBox();
+            this.btnExportSQL = new System.Windows.Forms.Button();
             this.panelBottom = new System.Windows.Forms.Panel();
+            this.btnExportORG = new System.Windows.Forms.Button();
+            this.btnExportMD = new System.Windows.Forms.Button();
+            this.labelExport = new System.Windows.Forms.Label();
             this.btnRotateLayout = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.btnStandard = new System.Windows.Forms.Button();
@@ -51,9 +54,6 @@
             this.lvResult = new System.Windows.Forms.ListView();
             this.tbCurrentEntry = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.labelExport = new System.Windows.Forms.Label();
-            this.btnExportMD = new System.Windows.Forms.Button();
-            this.btnExportORG = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -95,17 +95,6 @@
             this.panelTop.Name = "panelTop";
             this.panelTop.Size = new System.Drawing.Size(899, 30);
             this.panelTop.TabIndex = 0;
-            // 
-            // btnExportSQL
-            // 
-            this.btnExportSQL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportSQL.Location = new System.Drawing.Point(127, 3);
-            this.btnExportSQL.Name = "btnExportSQL";
-            this.btnExportSQL.Size = new System.Drawing.Size(30, 23);
-            this.btnExportSQL.TabIndex = 8;
-            this.btnExportSQL.Text = "sql";
-            this.btnExportSQL.UseVisualStyleBackColor = true;
-            this.btnExportSQL.Click += new System.EventHandler(this.btnExportSQL_Click);
             // 
             // btnPurge
             // 
@@ -209,6 +198,17 @@
             this.tbSearchField.TabIndex = 0;
             this.tbSearchField.TextChanged += new System.EventHandler(this.tbSearchField_TextChanged);
             // 
+            // btnExportSQL
+            // 
+            this.btnExportSQL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnExportSQL.Location = new System.Drawing.Point(127, 3);
+            this.btnExportSQL.Name = "btnExportSQL";
+            this.btnExportSQL.Size = new System.Drawing.Size(30, 23);
+            this.btnExportSQL.TabIndex = 8;
+            this.btnExportSQL.Text = "sql";
+            this.btnExportSQL.UseVisualStyleBackColor = true;
+            this.btnExportSQL.Click += new System.EventHandler(this.btnExportSQL_Click);
+            // 
             // panelBottom
             // 
             this.panelBottom.Controls.Add(this.btnExportORG);
@@ -225,6 +225,37 @@
             this.panelBottom.Name = "panelBottom";
             this.panelBottom.Size = new System.Drawing.Size(899, 30);
             this.panelBottom.TabIndex = 2;
+            // 
+            // btnExportORG
+            // 
+            this.btnExportORG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnExportORG.Location = new System.Drawing.Point(199, 3);
+            this.btnExportORG.Name = "btnExportORG";
+            this.btnExportORG.Size = new System.Drawing.Size(30, 23);
+            this.btnExportORG.TabIndex = 11;
+            this.btnExportORG.Text = "org";
+            this.btnExportORG.UseVisualStyleBackColor = true;
+            this.btnExportORG.Click += new System.EventHandler(this.btnExportORG_Click);
+            // 
+            // btnExportMD
+            // 
+            this.btnExportMD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+            this.btnExportMD.Location = new System.Drawing.Point(163, 3);
+            this.btnExportMD.Name = "btnExportMD";
+            this.btnExportMD.Size = new System.Drawing.Size(30, 23);
+            this.btnExportMD.TabIndex = 10;
+            this.btnExportMD.Text = "md";
+            this.btnExportMD.UseVisualStyleBackColor = true;
+            this.btnExportMD.Click += new System.EventHandler(this.btnExportMD_Click);
+            // 
+            // labelExport
+            // 
+            this.labelExport.AutoSize = true;
+            this.labelExport.Location = new System.Drawing.Point(85, 8);
+            this.labelExport.Name = "labelExport";
+            this.labelExport.Size = new System.Drawing.Size(36, 13);
+            this.labelExport.TabIndex = 9;
+            this.labelExport.Text = "export";
             // 
             // btnRotateLayout
             // 
@@ -326,38 +357,6 @@
             this.tbCurrentEntry.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.tbCurrentEntry.Size = new System.Drawing.Size(447, 368);
             this.tbCurrentEntry.TabIndex = 0;
-            // 
-            // labelExport
-            // 
-            this.labelExport.AutoSize = true;
-            this.labelExport.Location = new System.Drawing.Point(85, 8);
-            this.labelExport.Name = "labelExport";
-            this.labelExport.Size = new System.Drawing.Size(36, 13);
-            this.labelExport.TabIndex = 9;
-            this.labelExport.Text = "export";
-            // 
-            // btnExportMD
-            // 
-            this.btnExportMD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportMD.Location = new System.Drawing.Point(163, 3);
-            this.btnExportMD.Name = "btnExportMD";
-            this.btnExportMD.Size = new System.Drawing.Size(30, 23);
-            this.btnExportMD.TabIndex = 10;
-            this.btnExportMD.Text = "md";
-            this.btnExportMD.UseVisualStyleBackColor = true;
-            this.btnExportMD.Click += new System.EventHandler(this.btnExportMD_Click);
-            // 
-            // btnExportORG
-            // 
-            this.btnExportORG.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExportORG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportORG.Location = new System.Drawing.Point(199, 3);
-            this.btnExportORG.Name = "btnExportORG";
-            this.btnExportORG.Size = new System.Drawing.Size(30, 23);
-            this.btnExportORG.TabIndex = 11;
-            this.btnExportORG.Text = "org";
-            this.btnExportORG.UseVisualStyleBackColor = true;
-            this.btnExportORG.Click += new System.EventHandler(this.btnExportORG_Click);
             // 
             // FormMain
             // 
