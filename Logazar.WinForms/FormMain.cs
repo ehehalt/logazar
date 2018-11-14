@@ -35,6 +35,8 @@ namespace Logazar.WinForms
         // Todo: save properties in config file
         private ResultTypeEnum ResultType { get; set; } = ResultTypeEnum.Standard;
         private Boolean SearchRegex { get; set; } = true;
+        private Boolean Pinned { get; set; } = false;
+        private DateTime PinnedTime { get; set; } = DateTime.MinValue;
         private Boolean SearchCaseSensitive { get; set; } = false;
         private LogFile logFile { get; set; }
 
@@ -78,7 +80,10 @@ namespace Logazar.WinForms
 
         private void btnPin_Click(object sender, EventArgs e)
         {
-
+            Pinned = !Pinned;
+            PinnedTime = DateTime.Now;
+            SearchButtons_Load();
+            LvResult_ShowData();
         }
 
 
@@ -244,6 +249,9 @@ namespace Logazar.WinForms
                     .Reverse()
                     .Where(entry => entry.Type == LogFile.COMPILE);
 
+                if (Pinned)
+                    entries = entries.Where(entry => entry.TimeStamp >= PinnedTime);
+
                 if (SearchRegex)
                 {
                     Regex rx = new Regex(tbSearchField.Text, SearchCaseSensitive ? RegexOptions.None : RegexOptions.IgnoreCase);
@@ -283,6 +291,8 @@ namespace Logazar.WinForms
 
             HighlightButton(btnIgnoreCase, SearchCaseSensitive);
             HighlightButton(btnRegex, SearchRegex);
+
+            HighlightButton(btnPin, Pinned);
         }
 
         private void CurrentEntryButtons_Load()

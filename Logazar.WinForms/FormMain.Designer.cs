@@ -151,7 +151,6 @@
             // 
             this.btnPin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPin.Enabled = false;
             this.btnPin.Location = new System.Drawing.Point(743, 3);
             this.btnPin.Name = "btnPin";
             this.btnPin.Size = new System.Drawing.Size(29, 23);
