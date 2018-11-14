@@ -227,9 +227,14 @@ namespace Logazar.WinForms
 
         private void Title_Load()
         {
+            this.Text = $"Logazar {GetVersionString()}";
+        }
+
+        private string GetVersionString()
+        {
             Version version = Assembly.GetEntryAssembly().GetName().Version;
             String versionString = version.Major + "." + version.Minor + "." + version.Build;
-            this.Text = $"Logazar {versionString}";
+            return versionString;
         }
 
         private void Buttons_Load()
@@ -448,7 +453,8 @@ namespace Logazar.WinForms
                         text = "# Guptaora.log" + Environment.NewLine + Environment.NewLine;
                         break;
                     case ExportTypeEnum.OrgMode:
-                        text = "* Guptaora.log" + Environment.NewLine;
+                        text = GetOrgModeHeader() + Environment.NewLine;
+                        text += "* Guptaora.log" + Environment.NewLine;
                         break;
                 }
 
@@ -525,6 +531,19 @@ namespace Logazar.WinForms
                 toolStripStatusLabel.Text = $"Error: {ex.Message}";
                 MessageBox.Show($"Error while creating file '{filePath}':" + Environment.NewLine + ex.Message, "Logazar - Export", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+        }
+
+        private string GetOrgModeHeader()
+        {
+            var lines = new List<String>();
+            lines.Add($"#+TITLE: {logFile.FilePath}");
+            lines.Add($"#+AUTHOR: {System.Environment.UserName}");
+            lines.Add($"#+DATE: {DateTime.Now.ToShortDateString()} {DateTime.Now.ToShortTimeString()}");
+            lines.Add($"#+DESCRIPTION: Guptaoralog.org create by Logazar {GetVersionString()}");
+            lines.Add($"#+PROPERTY: header-args:sql :engine oracle :database dbname :dbuser username :dbpassword password");
+            lines.Add("");
+
+            return String.Join(System.Environment.NewLine, lines);
         }
 
         #endregion Methods
