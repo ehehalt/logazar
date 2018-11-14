@@ -455,22 +455,23 @@ namespace Logazar.WinForms
                 int idx = 1;
                 foreach (LogEntry logEntry in logFile.Entries.Where(entry => entry.Type == LogFile.COMPILE))
                 {
+                    var logEntryIdentifier = $"{idx} - {logEntry.TimeStampString}";
                     switch (exportType)
                     {
                         case ExportTypeEnum.SQL:
-                            text += $"-- {idx} - ";
+                            text += $"-- {logEntryIdentifier}";
                             text += System.Environment.NewLine;
                             text += System.Environment.NewLine;
                             break;
                         case ExportTypeEnum.Markdown:
-                            text += $"## Statement {idx}";
+                            text += $"## Statement {logEntryIdentifier}";
                             text += Environment.NewLine;
                             text += Environment.NewLine;
                             text += ResultType == ResultTypeEnum.Original ? "```text" : "```sql";
                             text += Environment.NewLine;
                             break;
                         case ExportTypeEnum.OrgMode:
-                            text += $"** Statement {idx}";
+                            text += $"** Statement {logEntryIdentifier}";
                             text += Environment.NewLine;
                             text += Environment.NewLine;
                             text += ResultType == ResultTypeEnum.Original ? "#+BEGIN_SRC text" : "#+BEGIN_SRC sql";
