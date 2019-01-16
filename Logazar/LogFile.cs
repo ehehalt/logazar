@@ -15,7 +15,12 @@ namespace Logazar
     public IList<LogEntry> Entries { get; set; }
 
     public const String COMPILE = "compile";
-    public const String CONNECT = "connect";
+    public const String CONNECT = "connect";    
+    public const String DESCRIBE = "describe";
+    public const String EXECUTE = "execute";
+    public const String BIND = "bind";
+    public const String FETCH = "fetch";
+    public const String END_OF_FETCH = "end of fetch";
 
     private static Regex lineRegex;
     private static Regex LineRegex
