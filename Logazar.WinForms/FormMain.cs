@@ -39,6 +39,8 @@ namespace Logazar.WinForms
         private DateTime PinnedTime { get; set; } = DateTime.MinValue;
         private Boolean SearchCaseSensitive { get; set; } = false;
         private LogFile logFile { get; set; }
+        private Boolean FilterCompile { get; set; } = true;
+        private Boolean FilterDescribe { get; set; } = false;
 
         #endregion Properties
         #region Constructor(s)
@@ -152,6 +154,20 @@ namespace Logazar.WinForms
             CurrentEntryButtons_Load();
         }
 
+        private void btnFilterCompile_Click(object sender, EventArgs e)
+        {
+            FilterCompile = !FilterCompile;
+            CurrentEntryButtons_Load();
+            LvResult_ShowData();
+        }
+
+        private void btnFilterDescribe_Click(object sender, EventArgs e)
+        {
+            FilterDescribe = !FilterDescribe;
+            CurrentEntryButtons_Load();
+            LvResult_ShowData();
+        }
+
         private void tbSearchField_TextChanged(object sender, EventArgs e)
         {
             LvResult_ShowData();
@@ -248,11 +264,17 @@ namespace Logazar.WinForms
         {
             lvResult.BeginUpdate();
             lvResult.Items.Clear();
+
+            var filterTypes = new List<String>();
+            if (FilterCompile) filterTypes.Add(LogFile.COMPILE);
+            if (FilterDescribe) filterTypes.Add(LogFile.DESCRIBE);
+
             try
             {
                 var entries = logFile.Entries
                     .Reverse()
-                    .Where(entry => entry.Type == LogFile.COMPILE);
+                    .Where(entry => filterTypes.Contains(entry.Type))
+                    ;
 
                 if (Pinned)
                     entries = entries.Where(entry => entry.TimeStamp >= PinnedTime);
@@ -276,7 +298,7 @@ namespace Logazar.WinForms
 
                 foreach (LogEntry entry in entries)
                 {
-                    var item = new ListViewItem(new String[] { entry.TimeStampString, entry.Level, entry.Type, entry.Data });
+                    var item = new ListViewItem(new String[] { entry.TimeStampString, entry.Level, entry.Type.ToLower(), entry.Data });
                     item.Tag = entry;
                     lvResult.Items.Add(item);
                 }
@@ -319,6 +341,9 @@ namespace Logazar.WinForms
                     break;
             }
 
+            HighlightButton(btnFilterCompile, FilterCompile);
+            HighlightButton(btnFilterDescribe, FilterDescribe);
+
             TbCurrentEntry_ShowData();
         }
 
@@ -336,7 +361,7 @@ namespace Logazar.WinForms
                             tbCurrentEntry.Text = entry.Data;
                             break;
                         case ResultTypeEnum.Pretty:
-                            tbCurrentEntry.Text = PrettifySql(entry.Data);
+                            tbCurrentEntry.Text = Prettify(entry);
                             break;
                         case ResultTypeEnum.Original:
                             tbCurrentEntry.Text = entry.DataOriginal;
@@ -366,6 +391,17 @@ namespace Logazar.WinForms
             else
             {
                 button.BackColor = Color.LightGray;
+            }
+        }
+
+        private String Prettify(LogEntry entry)
+        {
+            switch (entry.Type)
+            {
+                case LogFile.COMPILE:
+                    return PrettifySql(entry.Data);
+                default:
+                    return entry.Data;
             }
         }
 

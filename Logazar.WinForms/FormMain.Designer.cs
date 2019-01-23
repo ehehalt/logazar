@@ -42,6 +42,7 @@
             this.tbSearchField = new System.Windows.Forms.TextBox();
             this.btnExportSQL = new System.Windows.Forms.Button();
             this.panelBottom = new System.Windows.Forms.Panel();
+            this.labelFilterTypes = new System.Windows.Forms.Label();
             this.btnExportORG = new System.Windows.Forms.Button();
             this.btnExportMD = new System.Windows.Forms.Button();
             this.labelExport = new System.Windows.Forms.Label();
@@ -54,6 +55,8 @@
             this.lvResult = new System.Windows.Forms.ListView();
             this.tbCurrentEntry = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btnFilterCompile = new System.Windows.Forms.Button();
+            this.btnFilterDescribe = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -200,7 +203,7 @@
             // btnExportSQL
             // 
             this.btnExportSQL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportSQL.Location = new System.Drawing.Point(127, 3);
+            this.btnExportSQL.Location = new System.Drawing.Point(288, 3);
             this.btnExportSQL.Name = "btnExportSQL";
             this.btnExportSQL.Size = new System.Drawing.Size(30, 23);
             this.btnExportSQL.TabIndex = 8;
@@ -210,6 +213,9 @@
             // 
             // panelBottom
             // 
+            this.panelBottom.Controls.Add(this.btnFilterDescribe);
+            this.panelBottom.Controls.Add(this.btnFilterCompile);
+            this.panelBottom.Controls.Add(this.labelFilterTypes);
             this.panelBottom.Controls.Add(this.btnExportORG);
             this.panelBottom.Controls.Add(this.btnExportMD);
             this.panelBottom.Controls.Add(this.labelExport);
@@ -225,10 +231,19 @@
             this.panelBottom.Size = new System.Drawing.Size(899, 30);
             this.panelBottom.TabIndex = 2;
             // 
+            // labelFilterTypes
+            // 
+            this.labelFilterTypes.AutoSize = true;
+            this.labelFilterTypes.Location = new System.Drawing.Point(85, 8);
+            this.labelFilterTypes.Name = "labelFilterTypes";
+            this.labelFilterTypes.Size = new System.Drawing.Size(26, 13);
+            this.labelFilterTypes.TabIndex = 12;
+            this.labelFilterTypes.Text = "filter";
+            // 
             // btnExportORG
             // 
             this.btnExportORG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportORG.Location = new System.Drawing.Point(199, 3);
+            this.btnExportORG.Location = new System.Drawing.Point(360, 3);
             this.btnExportORG.Name = "btnExportORG";
             this.btnExportORG.Size = new System.Drawing.Size(30, 23);
             this.btnExportORG.TabIndex = 11;
@@ -239,7 +254,7 @@
             // btnExportMD
             // 
             this.btnExportMD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportMD.Location = new System.Drawing.Point(163, 3);
+            this.btnExportMD.Location = new System.Drawing.Point(324, 3);
             this.btnExportMD.Name = "btnExportMD";
             this.btnExportMD.Size = new System.Drawing.Size(30, 23);
             this.btnExportMD.TabIndex = 10;
@@ -250,7 +265,7 @@
             // labelExport
             // 
             this.labelExport.AutoSize = true;
-            this.labelExport.Location = new System.Drawing.Point(85, 8);
+            this.labelExport.Location = new System.Drawing.Point(246, 8);
             this.labelExport.Name = "labelExport";
             this.labelExport.Size = new System.Drawing.Size(36, 13);
             this.labelExport.TabIndex = 9;
@@ -357,6 +372,28 @@
             this.tbCurrentEntry.Size = new System.Drawing.Size(447, 368);
             this.tbCurrentEntry.TabIndex = 0;
             // 
+            // btnFilterCompile
+            // 
+            this.btnFilterCompile.Location = new System.Drawing.Point(117, 3);
+            this.btnFilterCompile.Name = "btnFilterCompile";
+            this.btnFilterCompile.Size = new System.Drawing.Size(38, 23);
+            this.btnFilterCompile.TabIndex = 13;
+            this.btnFilterCompile.Text = "cmp";
+            this.toolTip.SetToolTip(this.btnFilterCompile, "Filter \"compile\"");
+            this.btnFilterCompile.UseVisualStyleBackColor = true;
+            this.btnFilterCompile.Click += new System.EventHandler(this.btnFilterCompile_Click);
+            // 
+            // btnFilterDescribe
+            // 
+            this.btnFilterDescribe.Location = new System.Drawing.Point(161, 3);
+            this.btnFilterDescribe.Name = "btnFilterDescribe";
+            this.btnFilterDescribe.Size = new System.Drawing.Size(38, 23);
+            this.btnFilterDescribe.TabIndex = 13;
+            this.btnFilterDescribe.Text = "dsc";
+            this.toolTip.SetToolTip(this.btnFilterDescribe, "Filter \"Describe\"");
+            this.btnFilterDescribe.UseVisualStyleBackColor = true;
+            this.btnFilterDescribe.Click += new System.EventHandler(this.btnFilterDescribe_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -413,6 +450,9 @@
         private System.Windows.Forms.Button btnExportORG;
         private System.Windows.Forms.Button btnExportMD;
         private System.Windows.Forms.Label labelExport;
+        private System.Windows.Forms.Label labelFilterTypes;
+        private System.Windows.Forms.Button btnFilterCompile;
+        private System.Windows.Forms.Button btnFilterDescribe;
     }
 }
 
