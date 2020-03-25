@@ -121,5 +121,6 @@ namespace Logazar.Tests
       var dataOriginal = line1 + System.Environment.NewLine + line2;
       Assert.Equal(entry2.DataOriginal, dataOriginal);
     }
+
   }
 }

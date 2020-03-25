@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
             this.statusStrip = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel = new System.Windows.Forms.ToolStripStatusLabel();
             this.panelTop = new System.Windows.Forms.Panel();
@@ -41,7 +42,8 @@
             this.btnInfo = new System.Windows.Forms.Button();
             this.tbSearchField = new System.Windows.Forms.TextBox();
             this.btnExportSQL = new System.Windows.Forms.Button();
-            this.panelBottom = new System.Windows.Forms.Panel();
+            this.btnFilterDescribe = new System.Windows.Forms.Button();
+            this.btnFilterCompile = new System.Windows.Forms.Button();
             this.labelFilterTypes = new System.Windows.Forms.Label();
             this.btnExportORG = new System.Windows.Forms.Button();
             this.btnExportMD = new System.Windows.Forms.Button();
@@ -55,15 +57,15 @@
             this.lvResult = new System.Windows.Forms.ListView();
             this.tbCurrentEntry = new System.Windows.Forms.TextBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.btnFilterCompile = new System.Windows.Forms.Button();
-            this.btnFilterDescribe = new System.Windows.Forms.Button();
+            this.panelBottom = new System.Windows.Forms.FlowLayoutPanel();
+            this.labelResult = new System.Windows.Forms.Label();
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
-            this.panelBottom.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
             this.splitContainer.Panel1.SuspendLayout();
             this.splitContainer.Panel2.SuspendLayout();
             this.splitContainer.SuspendLayout();
+            this.panelBottom.SuspendLayout();
             this.SuspendLayout();
             // 
             // statusStrip
@@ -203,7 +205,7 @@
             // btnExportSQL
             // 
             this.btnExportSQL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportSQL.Location = new System.Drawing.Point(288, 3);
+            this.btnExportSQL.Location = new System.Drawing.Point(319, 3);
             this.btnExportSQL.Name = "btnExportSQL";
             this.btnExportSQL.Size = new System.Drawing.Size(30, 23);
             this.btnExportSQL.TabIndex = 8;
@@ -211,39 +213,42 @@
             this.btnExportSQL.UseVisualStyleBackColor = true;
             this.btnExportSQL.Click += new System.EventHandler(this.btnExportSQL_Click);
             // 
-            // panelBottom
+            // btnFilterDescribe
             // 
-            this.panelBottom.Controls.Add(this.btnFilterDescribe);
-            this.panelBottom.Controls.Add(this.btnFilterCompile);
-            this.panelBottom.Controls.Add(this.labelFilterTypes);
-            this.panelBottom.Controls.Add(this.btnExportORG);
-            this.panelBottom.Controls.Add(this.btnExportMD);
-            this.panelBottom.Controls.Add(this.labelExport);
-            this.panelBottom.Controls.Add(this.btnExportSQL);
-            this.panelBottom.Controls.Add(this.btnRotateLayout);
-            this.panelBottom.Controls.Add(this.btnCopy);
-            this.panelBottom.Controls.Add(this.btnStandard);
-            this.panelBottom.Controls.Add(this.btnPretty);
-            this.panelBottom.Controls.Add(this.btnOriginal);
-            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panelBottom.Location = new System.Drawing.Point(0, 398);
-            this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(899, 30);
-            this.panelBottom.TabIndex = 2;
+            this.btnFilterDescribe.Location = new System.Drawing.Point(161, 3);
+            this.btnFilterDescribe.Name = "btnFilterDescribe";
+            this.btnFilterDescribe.Size = new System.Drawing.Size(38, 23);
+            this.btnFilterDescribe.TabIndex = 13;
+            this.btnFilterDescribe.Text = "dsc";
+            this.toolTip.SetToolTip(this.btnFilterDescribe, "Filter \"Describe\"");
+            this.btnFilterDescribe.UseVisualStyleBackColor = true;
+            this.btnFilterDescribe.Click += new System.EventHandler(this.btnFilterDescribe_Click);
+            // 
+            // btnFilterCompile
+            // 
+            this.btnFilterCompile.Location = new System.Drawing.Point(117, 3);
+            this.btnFilterCompile.Name = "btnFilterCompile";
+            this.btnFilterCompile.Size = new System.Drawing.Size(38, 23);
+            this.btnFilterCompile.TabIndex = 13;
+            this.btnFilterCompile.Text = "cmp";
+            this.toolTip.SetToolTip(this.btnFilterCompile, "Filter \"compile\"");
+            this.btnFilterCompile.UseVisualStyleBackColor = true;
+            this.btnFilterCompile.Click += new System.EventHandler(this.btnFilterCompile_Click);
             // 
             // labelFilterTypes
             // 
-            this.labelFilterTypes.AutoSize = true;
-            this.labelFilterTypes.Location = new System.Drawing.Point(85, 8);
+            this.labelFilterTypes.Location = new System.Drawing.Point(85, 0);
             this.labelFilterTypes.Name = "labelFilterTypes";
-            this.labelFilterTypes.Size = new System.Drawing.Size(26, 13);
+            this.labelFilterTypes.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
+            this.labelFilterTypes.Size = new System.Drawing.Size(26, 23);
             this.labelFilterTypes.TabIndex = 12;
             this.labelFilterTypes.Text = "filter";
+            this.labelFilterTypes.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnExportORG
             // 
             this.btnExportORG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportORG.Location = new System.Drawing.Point(360, 3);
+            this.btnExportORG.Location = new System.Drawing.Point(247, 3);
             this.btnExportORG.Name = "btnExportORG";
             this.btnExportORG.Size = new System.Drawing.Size(30, 23);
             this.btnExportORG.TabIndex = 11;
@@ -254,7 +259,7 @@
             // btnExportMD
             // 
             this.btnExportMD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportMD.Location = new System.Drawing.Point(324, 3);
+            this.btnExportMD.Location = new System.Drawing.Point(283, 3);
             this.btnExportMD.Name = "btnExportMD";
             this.btnExportMD.Size = new System.Drawing.Size(30, 23);
             this.btnExportMD.TabIndex = 10;
@@ -264,12 +269,13 @@
             // 
             // labelExport
             // 
-            this.labelExport.AutoSize = true;
-            this.labelExport.Location = new System.Drawing.Point(246, 8);
+            this.labelExport.Location = new System.Drawing.Point(205, 0);
             this.labelExport.Name = "labelExport";
-            this.labelExport.Size = new System.Drawing.Size(36, 13);
+            this.labelExport.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
+            this.labelExport.Size = new System.Drawing.Size(36, 23);
             this.labelExport.TabIndex = 9;
             this.labelExport.Text = "export";
+            this.labelExport.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnRotateLayout
             // 
@@ -284,7 +290,8 @@
             // 
             // btnCopy
             // 
-            this.btnCopy.Location = new System.Drawing.Point(597, 3);
+            this.btnCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnCopy.Location = new System.Drawing.Point(355, 3);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(57, 23);
             this.btnCopy.TabIndex = 0;
@@ -296,7 +303,7 @@
             // btnStandard
             // 
             this.btnStandard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStandard.Location = new System.Drawing.Point(731, 3);
+            this.btnStandard.Location = new System.Drawing.Point(460, 3);
             this.btnStandard.Name = "btnStandard";
             this.btnStandard.Size = new System.Drawing.Size(57, 23);
             this.btnStandard.TabIndex = 1;
@@ -308,7 +315,7 @@
             // btnPretty
             // 
             this.btnPretty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPretty.Location = new System.Drawing.Point(794, 3);
+            this.btnPretty.Location = new System.Drawing.Point(523, 3);
             this.btnPretty.Name = "btnPretty";
             this.btnPretty.Size = new System.Drawing.Size(48, 23);
             this.btnPretty.TabIndex = 2;
@@ -320,7 +327,7 @@
             // btnOriginal
             // 
             this.btnOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOriginal.Location = new System.Drawing.Point(848, 3);
+            this.btnOriginal.Location = new System.Drawing.Point(577, 3);
             this.btnOriginal.Name = "btnOriginal";
             this.btnOriginal.Size = new System.Drawing.Size(48, 23);
             this.btnOriginal.TabIndex = 3;
@@ -342,7 +349,7 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.tbCurrentEntry);
-            this.splitContainer.Size = new System.Drawing.Size(899, 368);
+            this.splitContainer.Size = new System.Drawing.Size(899, 369);
             this.splitContainer.SplitterDistance = 448;
             this.splitContainer.TabIndex = 1;
             // 
@@ -351,10 +358,11 @@
             this.lvResult.Dock = System.Windows.Forms.DockStyle.Fill;
             this.lvResult.FullRowSelect = true;
             this.lvResult.GridLines = true;
+            this.lvResult.HideSelection = false;
             this.lvResult.Location = new System.Drawing.Point(0, 0);
             this.lvResult.MultiSelect = false;
             this.lvResult.Name = "lvResult";
-            this.lvResult.Size = new System.Drawing.Size(448, 368);
+            this.lvResult.Size = new System.Drawing.Size(448, 369);
             this.lvResult.TabIndex = 0;
             this.lvResult.UseCompatibleStateImageBehavior = false;
             this.lvResult.SelectedIndexChanged += new System.EventHandler(this.lvResult_SelectedIndexChanged);
@@ -369,30 +377,40 @@
             this.tbCurrentEntry.Name = "tbCurrentEntry";
             this.tbCurrentEntry.ReadOnly = true;
             this.tbCurrentEntry.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbCurrentEntry.Size = new System.Drawing.Size(447, 368);
+            this.tbCurrentEntry.Size = new System.Drawing.Size(447, 369);
             this.tbCurrentEntry.TabIndex = 0;
             // 
-            // btnFilterCompile
+            // panelBottom
             // 
-            this.btnFilterCompile.Location = new System.Drawing.Point(117, 3);
-            this.btnFilterCompile.Name = "btnFilterCompile";
-            this.btnFilterCompile.Size = new System.Drawing.Size(38, 23);
-            this.btnFilterCompile.TabIndex = 13;
-            this.btnFilterCompile.Text = "cmp";
-            this.toolTip.SetToolTip(this.btnFilterCompile, "Filter \"compile\"");
-            this.btnFilterCompile.UseVisualStyleBackColor = true;
-            this.btnFilterCompile.Click += new System.EventHandler(this.btnFilterCompile_Click);
+            this.panelBottom.AutoSize = true;
+            this.panelBottom.Controls.Add(this.btnRotateLayout);
+            this.panelBottom.Controls.Add(this.labelFilterTypes);
+            this.panelBottom.Controls.Add(this.btnFilterCompile);
+            this.panelBottom.Controls.Add(this.btnFilterDescribe);
+            this.panelBottom.Controls.Add(this.labelExport);
+            this.panelBottom.Controls.Add(this.btnExportORG);
+            this.panelBottom.Controls.Add(this.btnExportMD);
+            this.panelBottom.Controls.Add(this.btnExportSQL);
+            this.panelBottom.Controls.Add(this.btnCopy);
+            this.panelBottom.Controls.Add(this.labelResult);
+            this.panelBottom.Controls.Add(this.btnStandard);
+            this.panelBottom.Controls.Add(this.btnPretty);
+            this.panelBottom.Controls.Add(this.btnOriginal);
+            this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panelBottom.Location = new System.Drawing.Point(0, 399);
+            this.panelBottom.Name = "panelBottom";
+            this.panelBottom.Size = new System.Drawing.Size(899, 29);
+            this.panelBottom.TabIndex = 14;
             // 
-            // btnFilterDescribe
+            // labelResult
             // 
-            this.btnFilterDescribe.Location = new System.Drawing.Point(161, 3);
-            this.btnFilterDescribe.Name = "btnFilterDescribe";
-            this.btnFilterDescribe.Size = new System.Drawing.Size(38, 23);
-            this.btnFilterDescribe.TabIndex = 13;
-            this.btnFilterDescribe.Text = "dsc";
-            this.toolTip.SetToolTip(this.btnFilterDescribe, "Filter \"Describe\"");
-            this.btnFilterDescribe.UseVisualStyleBackColor = true;
-            this.btnFilterDescribe.Click += new System.EventHandler(this.btnFilterDescribe_Click);
+            this.labelResult.Location = new System.Drawing.Point(418, 0);
+            this.labelResult.Name = "labelResult";
+            this.labelResult.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
+            this.labelResult.Size = new System.Drawing.Size(36, 23);
+            this.labelResult.TabIndex = 9;
+            this.labelResult.Text = "result";
+            this.labelResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // FormMain
             // 
@@ -403,6 +421,7 @@
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelTop);
             this.Controls.Add(this.statusStrip);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormMain";
             this.Text = "Logazar";
             this.Load += new System.EventHandler(this.FormMain_Load);
@@ -411,13 +430,12 @@
             this.statusStrip.PerformLayout();
             this.panelTop.ResumeLayout(false);
             this.panelTop.PerformLayout();
-            this.panelBottom.ResumeLayout(false);
-            this.panelBottom.PerformLayout();
             this.splitContainer.Panel1.ResumeLayout(false);
             this.splitContainer.Panel2.ResumeLayout(false);
             this.splitContainer.Panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).EndInit();
             this.splitContainer.ResumeLayout(false);
+            this.panelBottom.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -428,7 +446,6 @@
         private System.Windows.Forms.StatusStrip statusStrip;
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel;
         private System.Windows.Forms.Panel panelTop;
-        private System.Windows.Forms.Panel panelBottom;
         private System.Windows.Forms.SplitContainer splitContainer;
         private System.Windows.Forms.ListView lvResult;
         private System.Windows.Forms.TextBox tbCurrentEntry;
@@ -453,6 +470,8 @@
         private System.Windows.Forms.Label labelFilterTypes;
         private System.Windows.Forms.Button btnFilterCompile;
         private System.Windows.Forms.Button btnFilterDescribe;
+        private System.Windows.Forms.FlowLayoutPanel panelBottom;
+        private System.Windows.Forms.Label labelResult;
     }
 }
 
