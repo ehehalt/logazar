@@ -59,6 +59,7 @@
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panelBottom = new System.Windows.Forms.FlowLayoutPanel();
             this.labelResult = new System.Windows.Forms.Label();
+            this.btnFilterConnect = new System.Windows.Forms.Button();
             this.statusStrip.SuspendLayout();
             this.panelTop.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer)).BeginInit();
@@ -74,7 +75,7 @@
             this.toolStripStatusLabel});
             this.statusStrip.Location = new System.Drawing.Point(0, 428);
             this.statusStrip.Name = "statusStrip";
-            this.statusStrip.Size = new System.Drawing.Size(899, 22);
+            this.statusStrip.Size = new System.Drawing.Size(909, 22);
             this.statusStrip.TabIndex = 3;
             this.statusStrip.Text = "statusStrip";
             // 
@@ -98,14 +99,14 @@
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
             this.panelTop.Name = "panelTop";
-            this.panelTop.Size = new System.Drawing.Size(899, 30);
+            this.panelTop.Size = new System.Drawing.Size(909, 30);
             this.panelTop.TabIndex = 0;
             // 
             // btnPurge
             // 
             this.btnPurge.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPurge.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPurge.Location = new System.Drawing.Point(778, 3);
+            this.btnPurge.Location = new System.Drawing.Point(788, 3);
             this.btnPurge.Name = "btnPurge";
             this.btnPurge.Size = new System.Drawing.Size(45, 23);
             this.btnPurge.TabIndex = 7;
@@ -118,7 +119,7 @@
             // 
             this.btnRefresh.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnRefresh.Location = new System.Drawing.Point(680, 3);
+            this.btnRefresh.Location = new System.Drawing.Point(690, 3);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(57, 23);
             this.btnRefresh.TabIndex = 1;
@@ -156,7 +157,7 @@
             // 
             this.btnPin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnPin.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnPin.Location = new System.Drawing.Point(743, 3);
+            this.btnPin.Location = new System.Drawing.Point(753, 3);
             this.btnPin.Name = "btnPin";
             this.btnPin.Size = new System.Drawing.Size(29, 23);
             this.btnPin.TabIndex = 2;
@@ -169,7 +170,7 @@
             this.btnConfigure.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnConfigure.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnConfigure.Enabled = false;
-            this.btnConfigure.Location = new System.Drawing.Point(829, 3);
+            this.btnConfigure.Location = new System.Drawing.Point(839, 3);
             this.btnConfigure.Name = "btnConfigure";
             this.btnConfigure.Size = new System.Drawing.Size(40, 23);
             this.btnConfigure.TabIndex = 3;
@@ -183,7 +184,7 @@
             this.btnInfo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnInfo.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.btnInfo.Enabled = false;
-            this.btnInfo.Location = new System.Drawing.Point(875, 3);
+            this.btnInfo.Location = new System.Drawing.Point(885, 3);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Size = new System.Drawing.Size(21, 23);
             this.btnInfo.TabIndex = 4;
@@ -198,14 +199,14 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tbSearchField.Location = new System.Drawing.Point(68, 5);
             this.tbSearchField.Name = "tbSearchField";
-            this.tbSearchField.Size = new System.Drawing.Size(606, 20);
+            this.tbSearchField.Size = new System.Drawing.Size(616, 20);
             this.tbSearchField.TabIndex = 0;
             this.tbSearchField.TextChanged += new System.EventHandler(this.tbSearchField_TextChanged);
             // 
             // btnExportSQL
             // 
             this.btnExportSQL.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportSQL.Location = new System.Drawing.Point(319, 3);
+            this.btnExportSQL.Location = new System.Drawing.Point(363, 3);
             this.btnExportSQL.Name = "btnExportSQL";
             this.btnExportSQL.Size = new System.Drawing.Size(30, 23);
             this.btnExportSQL.TabIndex = 8;
@@ -248,7 +249,7 @@
             // btnExportORG
             // 
             this.btnExportORG.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportORG.Location = new System.Drawing.Point(247, 3);
+            this.btnExportORG.Location = new System.Drawing.Point(291, 3);
             this.btnExportORG.Name = "btnExportORG";
             this.btnExportORG.Size = new System.Drawing.Size(30, 23);
             this.btnExportORG.TabIndex = 11;
@@ -259,7 +260,7 @@
             // btnExportMD
             // 
             this.btnExportMD.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.btnExportMD.Location = new System.Drawing.Point(283, 3);
+            this.btnExportMD.Location = new System.Drawing.Point(327, 3);
             this.btnExportMD.Name = "btnExportMD";
             this.btnExportMD.Size = new System.Drawing.Size(30, 23);
             this.btnExportMD.TabIndex = 10;
@@ -269,7 +270,7 @@
             // 
             // labelExport
             // 
-            this.labelExport.Location = new System.Drawing.Point(205, 0);
+            this.labelExport.Location = new System.Drawing.Point(249, 0);
             this.labelExport.Name = "labelExport";
             this.labelExport.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
             this.labelExport.Size = new System.Drawing.Size(36, 23);
@@ -291,7 +292,7 @@
             // btnCopy
             // 
             this.btnCopy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnCopy.Location = new System.Drawing.Point(355, 3);
+            this.btnCopy.Location = new System.Drawing.Point(399, 3);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(57, 23);
             this.btnCopy.TabIndex = 0;
@@ -303,7 +304,7 @@
             // btnStandard
             // 
             this.btnStandard.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnStandard.Location = new System.Drawing.Point(460, 3);
+            this.btnStandard.Location = new System.Drawing.Point(504, 3);
             this.btnStandard.Name = "btnStandard";
             this.btnStandard.Size = new System.Drawing.Size(57, 23);
             this.btnStandard.TabIndex = 1;
@@ -315,7 +316,7 @@
             // btnPretty
             // 
             this.btnPretty.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPretty.Location = new System.Drawing.Point(523, 3);
+            this.btnPretty.Location = new System.Drawing.Point(567, 3);
             this.btnPretty.Name = "btnPretty";
             this.btnPretty.Size = new System.Drawing.Size(48, 23);
             this.btnPretty.TabIndex = 2;
@@ -327,7 +328,7 @@
             // btnOriginal
             // 
             this.btnOriginal.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnOriginal.Location = new System.Drawing.Point(577, 3);
+            this.btnOriginal.Location = new System.Drawing.Point(621, 3);
             this.btnOriginal.Name = "btnOriginal";
             this.btnOriginal.Size = new System.Drawing.Size(48, 23);
             this.btnOriginal.TabIndex = 3;
@@ -349,8 +350,8 @@
             // splitContainer.Panel2
             // 
             this.splitContainer.Panel2.Controls.Add(this.tbCurrentEntry);
-            this.splitContainer.Size = new System.Drawing.Size(899, 369);
-            this.splitContainer.SplitterDistance = 448;
+            this.splitContainer.Size = new System.Drawing.Size(909, 369);
+            this.splitContainer.SplitterDistance = 452;
             this.splitContainer.TabIndex = 1;
             // 
             // lvResult
@@ -362,7 +363,7 @@
             this.lvResult.Location = new System.Drawing.Point(0, 0);
             this.lvResult.MultiSelect = false;
             this.lvResult.Name = "lvResult";
-            this.lvResult.Size = new System.Drawing.Size(448, 369);
+            this.lvResult.Size = new System.Drawing.Size(452, 369);
             this.lvResult.TabIndex = 0;
             this.lvResult.UseCompatibleStateImageBehavior = false;
             this.lvResult.SelectedIndexChanged += new System.EventHandler(this.lvResult_SelectedIndexChanged);
@@ -377,7 +378,7 @@
             this.tbCurrentEntry.Name = "tbCurrentEntry";
             this.tbCurrentEntry.ReadOnly = true;
             this.tbCurrentEntry.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tbCurrentEntry.Size = new System.Drawing.Size(447, 369);
+            this.tbCurrentEntry.Size = new System.Drawing.Size(453, 369);
             this.tbCurrentEntry.TabIndex = 0;
             // 
             // panelBottom
@@ -387,6 +388,7 @@
             this.panelBottom.Controls.Add(this.labelFilterTypes);
             this.panelBottom.Controls.Add(this.btnFilterCompile);
             this.panelBottom.Controls.Add(this.btnFilterDescribe);
+            this.panelBottom.Controls.Add(this.btnFilterConnect);
             this.panelBottom.Controls.Add(this.labelExport);
             this.panelBottom.Controls.Add(this.btnExportORG);
             this.panelBottom.Controls.Add(this.btnExportMD);
@@ -399,12 +401,12 @@
             this.panelBottom.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.panelBottom.Location = new System.Drawing.Point(0, 399);
             this.panelBottom.Name = "panelBottom";
-            this.panelBottom.Size = new System.Drawing.Size(899, 29);
+            this.panelBottom.Size = new System.Drawing.Size(909, 29);
             this.panelBottom.TabIndex = 14;
             // 
             // labelResult
             // 
-            this.labelResult.Location = new System.Drawing.Point(418, 0);
+            this.labelResult.Location = new System.Drawing.Point(462, 0);
             this.labelResult.Name = "labelResult";
             this.labelResult.Padding = new System.Windows.Forms.Padding(0, 7, 0, 0);
             this.labelResult.Size = new System.Drawing.Size(36, 23);
@@ -412,11 +414,22 @@
             this.labelResult.Text = "result";
             this.labelResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
+            // btnFilterConnect
+            // 
+            this.btnFilterConnect.Location = new System.Drawing.Point(205, 3);
+            this.btnFilterConnect.Name = "btnFilterConnect";
+            this.btnFilterConnect.Size = new System.Drawing.Size(38, 23);
+            this.btnFilterConnect.TabIndex = 14;
+            this.btnFilterConnect.Text = "con";
+            this.toolTip.SetToolTip(this.btnFilterConnect, "Filter \"Connect\"");
+            this.btnFilterConnect.UseVisualStyleBackColor = true;
+            this.btnFilterConnect.Click += new System.EventHandler(this.btnFilterConnect_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(899, 450);
+            this.ClientSize = new System.Drawing.Size(909, 450);
             this.Controls.Add(this.splitContainer);
             this.Controls.Add(this.panelBottom);
             this.Controls.Add(this.panelTop);
@@ -472,6 +485,7 @@
         private System.Windows.Forms.Button btnFilterDescribe;
         private System.Windows.Forms.FlowLayoutPanel panelBottom;
         private System.Windows.Forms.Label labelResult;
+        private System.Windows.Forms.Button btnFilterConnect;
     }
 }
 

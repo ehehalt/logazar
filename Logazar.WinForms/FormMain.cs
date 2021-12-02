@@ -41,6 +41,7 @@ namespace Logazar.WinForms
         private LogFile logFile { get; set; }
         private Boolean FilterCompile { get; set; } = true;
         private Boolean FilterDescribe { get; set; } = false;
+        private Boolean FilterConnect { get; set; } = false;
 
         #endregion Properties
         #region Constructor(s)
@@ -168,6 +169,13 @@ namespace Logazar.WinForms
             LvResult_ShowData();
         }
 
+        private void btnFilterConnect_Click(object sender, EventArgs e)
+        {
+            FilterConnect = !FilterConnect;
+            CurrentEntryButtons_Load();
+            LvResult_ShowData();
+        }
+
         private void tbSearchField_TextChanged(object sender, EventArgs e)
         {
             LvResult_ShowData();
@@ -268,6 +276,7 @@ namespace Logazar.WinForms
             var filterTypes = new List<String>();
             if (FilterCompile) filterTypes.Add(LogFile.COMPILE);
             if (FilterDescribe) filterTypes.Add(LogFile.DESCRIBE);
+            if (FilterConnect) filterTypes.Add(LogFile.CONNECT);
 
             try
             {
@@ -343,6 +352,7 @@ namespace Logazar.WinForms
 
             HighlightButton(btnFilterCompile, FilterCompile);
             HighlightButton(btnFilterDescribe, FilterDescribe);
+            HighlightButton(btnFilterConnect, FilterConnect);
 
             TbCurrentEntry_ShowData();
         }
@@ -583,5 +593,7 @@ namespace Logazar.WinForms
         }
 
         #endregion Methods
+
+
     }
 }
